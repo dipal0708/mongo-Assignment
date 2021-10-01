@@ -1,54 +1,18 @@
-const mongoose = require("mongoose"),
-  crypto = require('../helpers/hash/generate'),
-  Schema = mongoose.Schema,
-  collection = new Schema({
-    email: {
-      value: {
-        type: String,
-        default: null,
-        trim: true,
-      },
-      is_verified: {
-        type: Boolean,
-        default: false
-      },
-    },
-    phone: {
-      value: {
-        type: String,
-        default: null,
-        trim: true,
-      },
-      is_verified: {
-        type: Boolean,
-        default: false
-      },
-    },
-    first_name: {
-      type: String,
-      default: null,
-      trim: true,
-    },
-    last_name: {
-      type: String,
-      default: null,
-      trim: true,
-    },
-    password: {
-      type: String,
-      trim: true,
-      default: null,
-      maxlength: 191,
-      set: (password) => crypto(password)
-    },
-    status: {
-      type: Boolean,
-      default: true
-    },
-  }, {
-    strict: true,
-    timestamps: true
-  })
+const mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    collection = new Schema({
+        userName: String,
+        empCode: String,
+        firstName: String,
+        lastName: String,
+        email: String,
+        managerId: {
+            type: Schema.Types.ObjectId,
+            ref: 'user'
+        }
+    }, {
+        timestamps: true,
+        strict: true
+    })
 
-
-module.exports = mongoose.model("user", collection);
+module.exports = mongoose.model('user', collection)
